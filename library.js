@@ -49,8 +49,8 @@
 	 */
 
 	var constants = Object.freeze({
-			type: '',	// Either 'oauth' or 'oauth2'
-			name: '',	// Something unique to your OAuth provider in lowercase, like "github", or "nodebb"
+			type: 'oauth2',	// Either 'oauth' or 'oauth2'
+			name: 'nodebbplayground',	// Something unique to your OAuth provider in lowercase, like "github", or "nodebb"
 			oauth: {
 				requestTokenURL: '',
 				accessTokenURL: '',
@@ -59,12 +59,12 @@
 				consumerSecret: nconf.get('oauth:secret'),	// don't change this line
 			},
 			oauth2: {
-				authorizationURL: '',
-				tokenURL: '',
+				authorizationURL: 'https://login.microsoftonline.com/7a3766ba-3543-4e41-b457-6ae93654089c/oauth2/authorize',
+				tokenURL: 'https://login.microsoftonline.com/7a3766ba-3543-4e41-b457-6ae93654089c/oauth2/token',
 				clientID: nconf.get('oauth:id'),	// don't change this line
 				clientSecret: nconf.get('oauth:secret'),	// don't change this line
 			},
-			userRoute: ''	// This is the address to your app's "user profile" API endpoint (expects JSON)
+			userRoute: 'https://graph.windows.net/me?api-version=1.6'	// This is the address to your app's "user profile" API endpoint (expects JSON)
 		}),
 		configOk = false,
 		OAuth = {}, passportOAuth, opts;
@@ -171,8 +171,8 @@
 
 		var profile = {};
 		profile.id = data.id;
-		profile.displayName = data.name;
-		profile.emails = [{ value: data.email }];
+		profile.displayName = data.displayName;
+		profile.emails = [{ value: data.mail }];
 
 		// Do you want to automatically make somebody an admin? This line might help you do that...
 		// profile.isAdmin = data.isAdmin ? true : false;
